@@ -2,7 +2,7 @@ from typing import Set, Optional
 from string import ascii_uppercase
 from collections.abc import Iterable
 import csv
-# from Human import Human
+from Human import Human
 from Teacher import Teacher
 
 class Class(set):
