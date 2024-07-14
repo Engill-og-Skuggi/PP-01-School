@@ -1,4 +1,4 @@
-# from Class import Class
+from Class import Class
 
 
 class Human:
