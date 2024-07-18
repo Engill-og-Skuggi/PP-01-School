@@ -6,8 +6,8 @@ from collections.abc import Iterable
 
 
 class Teacher(Human):
-    """Класс "Учитель", являющийся подклассом Human и расширяющий его параметры атрибутами homeroom_class (присвоение школьного класса) и subjects (предметы учителя), а также
-     методами set_class и get_class"""
+    """Класс "Учитель", являющийся подклассом Human и расширяющий его параметры атрибутами homeroom_class
+     (присвоение школьного класса) и subjects (предметы учителя), а также геттером и сеттером по property 'classroom'"""
 
     _homeroom_class: Optional["Class"]
     _subjects: Set["Subject"]

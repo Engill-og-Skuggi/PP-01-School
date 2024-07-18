@@ -4,7 +4,8 @@ from typing import Optional
 
 
 class Student(Human):
-    """Класс "школьник", являющийся подклассом Human и расширяющий его параметры атрибутом class_assignment (присвоение школьного класса) и методами set_class и get_class"""
+    """Класс "школьник", являющийся подклассом Human и расширяющий его параметры атрибутом class_assignment
+     (присвоение школьного класса) а также геттером и сеттером по property 'classroom'"""
     _class_assignment: Optional["Class"]
 
     def __init__(self, last_name, name, surname, class_assignment=None, id=None):

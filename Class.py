@@ -10,7 +10,7 @@ from Subject import Subject
 class Class(set):
     """Класс "Школьный класс", являющийся подклассом стандартного класса set, расширяющий его параметры атрибутами
     grade (номер класса), letter (буква класса), homeroom_teacher (учитель - классный руководитель), students (школьники)
-    а также переопределяющий методы часть дандер-методов и методы add и remove"""
+    а также переопределяющий часть дандер-методов и методы add и remove"""
     _grade: int
     _letter: str
     _students: Optional[Set["Student"]]
