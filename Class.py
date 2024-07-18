@@ -2,8 +2,10 @@ from typing import Set, Optional
 from string import ascii_uppercase
 from collections.abc import Iterable
 import csv
-# from Human import Human
+from Human import Human
 from Teacher import Teacher
+from Student import Student
+from Subject import Subject
 
 class Class(set):
     """Класс "Школьный класс", являющийся подклассом стандартного класса set, расширяющий его параметры атрибутами
@@ -36,7 +38,7 @@ class Class(set):
         self._students = set(students)
         if self._students:
             for student in self._students:
-                student._class_assignment = self
+                student.classroom = self
 
     def __getitem__(self, name):
         result = set(student for student in self._students if str(student).upper().find(str(name).upper()) > -1)
@@ -66,6 +68,8 @@ class Class(set):
         return str(self._grade)+self._letter
 
     def __eq__(self, other):
+        if self is None or other is None:
+            return False
         return (str(self._grade)+self._letter) == (str(other._grade)+other._letter)
 
     def __bool__(self):
@@ -97,18 +101,21 @@ class Class(set):
 
     def add(self, container):
         """Переопределенный метод add, добавляющий школьника(-ов) в переменную _students"""
-        if container is None:
+        if container is None and self._students is None:
             self._students = set()
+        elif container is None:
+            pass
         elif isinstance(container, Iterable):
             for student in container:
                 self.__verify_student(student)
                 self._students = self._students.union(container)
+                student._class_assignment = self
         else:
             self.__verify_student(container)
             self._students = self._students.union({container})
-
-        for student in self._students:
-            student._class_assignment = self
+            container._class_assignment = self
+        # for student in self._students:
+        #     student._class_assignment = self
 
     def remove(self, container):
         """Переопределенный метод remove, удаляющий школьника(-ов) из переменной _students"""
@@ -123,6 +130,10 @@ class Class(set):
             self.__verify_student(container)
             self._students = self._students.difference({container})
             container._class_assignment = None
+
+    @staticmethod
+    def is_class():
+        return True
 
     def write_csv(self, class_file_name=""):
         """Метод для выгрузки всей информации о классе в csv"""
@@ -157,7 +168,7 @@ class Class(set):
             next(reader)
             subjects = []
             for subject in reader:
-                subjects.append(subject[0])
+                subjects.append(Subject[subject[0]])
 
         with open("_class_name.csv", 'r') as f:
             reader = csv.reader(f)
@@ -176,7 +187,7 @@ class Class(set):
                 else:
                     students.append(Student(id=int(pers_id), last_name=last_name, name=name, surname=surname))
 
-        class_1 = Class(grade=int(grade), letter=letter, homeroom_teacher=teacher, students=students)
-        return class_1, teacher, students
+        class_obj = Class(grade=int(grade), letter=letter, homeroom_teacher=teacher, students=students)
+        return class_obj, teacher, students
 
 

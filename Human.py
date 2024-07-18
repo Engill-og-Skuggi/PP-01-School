@@ -55,12 +55,6 @@ class Human:
         if not isinstance(other, Human):
             raise TypeError("Сравнение должно выполняться с объектом типа Human")
 
-    @staticmethod
-    def _verify_class(other):
-        """Метод верифицирует, является ли переданное значение экземпляром или наследником класса Class"""
-        if not isinstance(other, Class) and other is not None:
-            raise TypeError("В качестве класса, в котором учится школьник, можно назначить только объект типа Class или None")
-
     def _get_id(self):
         """Геттер, возвращающий приватный атрибут ID (int)"""
         return self.__id
