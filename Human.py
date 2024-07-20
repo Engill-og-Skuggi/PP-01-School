@@ -1,5 +1,3 @@
-from Class import Class
-
 
 class Human:
     """Класс 'Человек', являющийся суперклассом для подклассов Teacher и Student.
